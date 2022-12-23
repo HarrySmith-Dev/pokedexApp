@@ -11,7 +11,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-const DisplayPokedex = () => {
+const DisplayPokedex = ({ navigation, route }) => {
   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
@@ -49,7 +49,11 @@ const DisplayPokedex = () => {
       numColumns={1}
       renderItem={({ item }) => (
         <SafeAreaView style={listStyles.container}>
-          <TouchableHighlight>
+          <TouchableHighlight
+            activeOpacity={0.5}
+            underlayColor="#DDDDDD"
+            onPress={() => OnPress(item)}
+          >
             <View style={listStyles.infoCard}>
               <Image
                 source={{ uri: item.sprite }}
