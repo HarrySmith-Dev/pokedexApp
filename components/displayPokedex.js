@@ -17,7 +17,7 @@ const DisplayPokedex = ({ navigation, route }) => {
   useEffect(() => {
     for (let i = 1; i <= 100; i++) {
       axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${i}?sort=`)
+        .get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
         .then((response) => {
           // The name can be found in response.data.name
           // The sprite can be found in response.data.sprites.front_default
