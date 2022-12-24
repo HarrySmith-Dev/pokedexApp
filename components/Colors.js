@@ -5,4 +5,5 @@ export default {
   goldenYellow: "#FFDE00",
   goldFoil: "#B3A125",
   lightGrey: "#D3D3D3",
+  white: "#FFFFFF",
 };
