@@ -10,12 +10,13 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const DisplayPokedex = ({ navigation, route }) => {
   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 151; i++) {
       axios
         .get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
         .then((response) => {
@@ -24,7 +25,11 @@ const DisplayPokedex = ({ navigation, route }) => {
           const name = response.data.name;
           const sprite = response.data.sprites.front_default;
           const id = response.data.id;
-          setPokemon((prevPokemon) => [...prevPokemon, { name, sprite, id }]);
+          const types = response.data.types.map((type) => type.type.name);
+          setPokemon((prevPokemon) => [
+            ...prevPokemon,
+            { name, sprite, id, types },
+          ]);
         })
         .catch((error) => {
           console.error(error);
@@ -40,7 +45,27 @@ const DisplayPokedex = ({ navigation, route }) => {
 
   const OnPress = (item) => {
     let pokemonName = item.name;
-    navigation.push("Pokemon Details", { pokemon: item, name: pokemonName });
+    navigation.push("Pokemon Details", { data: item, name: pokemonName });
+  };
+
+  const typeColors = {
+    fire: "red",
+    water: "blue",
+    grass: "green",
+    electric: "yellow",
+    psychic: "purple",
+    flying: "lightblue",
+    poison: "purple",
+    bug: "darkgreen",
+    normal: "white",
+    ground: "brown",
+    fairy: "pink",
+    fighting: "black",
+    rock: "gold",
+    steel: "grey",
+    ice: "white",
+    dragon: "blue",
+    ghost: "lightgrey",
   };
 
   return (
@@ -49,22 +74,35 @@ const DisplayPokedex = ({ navigation, route }) => {
       numColumns={1}
       renderItem={({ item }) => (
         <SafeAreaView style={listStyles.container}>
-          <TouchableHighlight
-            activeOpacity={0.5}
-            underlayColor="#DDDDDD"
-            onPress={() => OnPress(item)}
-          >
-            <View style={listStyles.infoCard}>
+          <TouchableOpacity onPress={() => OnPress(item)}>
+            <View key={item.name} style={listStyles.infoCard}>
               <Image
                 source={{ uri: item.sprite }}
                 style={{ width: 150, height: 150 }}
               />
               <Text style={listStyles.font}>{item.name}</Text>
+              {item.types.map((type, index) => (
+                <Text
+                  key={index}
+                  style={{
+                    backgroundColor: typeColors[type],
+                    color: colors.white,
+                    borderWidth: 1,
+                    overflow: "hidden",
+                    borderRadius: 10,
+                    borderColor: typeColors[type],
+                    textAlign: "center",
+                    marginTop: 5,
+                  }}
+                >
+                  {type}
+                </Text>
+              ))}
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </SafeAreaView>
       )}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(item) => item.name}
     />
   );
 };
@@ -74,11 +112,11 @@ const listStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: colors.bostonRed,
+    backgroundColor: colors.red,
   },
   infoCard: {
     marginTop: 50,
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.bostonRed,
     borderRadius: 10,
     padding: 25,
   },
