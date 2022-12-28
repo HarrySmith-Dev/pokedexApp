@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import colors from "./Colors";
+import SearchInput from "./Search";
 import {
   View,
   Text,
@@ -8,12 +9,13 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  TouchableHighlight,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const DisplayPokedex = ({ navigation, route }) => {
   const [pokemon, setPokemon] = useState([]);
+
+  const [filteredSearch, setFilteredSearch] = useState("");
 
   useEffect(() => {
     for (let i = 1; i <= 151; i++) {
@@ -43,76 +45,118 @@ const DisplayPokedex = ({ navigation, route }) => {
     return 0;
   });
 
+  const handleSearchInput = (text) => {
+    setFilteredSearch(text);
+  };
+
+  const filteredPokemon = sortPokemonData.filter((pokemon) => {
+    return pokemon.name.toLowerCase().includes(filteredSearch.toLowerCase());
+  });
+
   const OnPress = (item) => {
     let pokemonName = item.name;
     navigation.push("Pokemon Details", { data: item, name: pokemonName });
   };
 
   const typeColors = {
-    fire: "red",
-    water: "blue",
-    grass: "green",
-    electric: "yellow",
-    psychic: "purple",
-    flying: "lightblue",
-    poison: "purple",
-    bug: "darkgreen",
-    normal: "white",
-    ground: "brown",
-    fairy: "pink",
-    fighting: "black",
-    rock: "gold",
-    steel: "grey",
-    ice: "white",
-    dragon: "blue",
-    ghost: "lightgrey",
+    fire: colors.fireRed,
+    water: colors.waterBlue,
+    grass: colors.leafGreen,
+    electric: colors.electricYellow,
+    psychic: colors.psychicPink,
+    flying: colors.flyingLilac,
+    poison: colors.poisonPurple,
+    bug: colors.bugGreen,
+    normal: colors.normal,
+    ground: colors.groundBeige,
+    fairy: colors.fairyPink,
+    fighting: colors.fightingMaroon,
+    rock: colors.rockGold,
+    steel: colors.steelGrey,
+    ice: colors.iceTurquoise,
+    dragon: colors.ultraViolet,
+    ghost: colors.ghostViolet,
+    dark: colors.lightBlack,
   };
 
   return (
-    <FlatList
-      data={sortPokemonData}
-      numColumns={1}
-      renderItem={({ item }) => (
-        <SafeAreaView style={listStyles.container}>
-          <TouchableOpacity onPress={() => OnPress(item)}>
-            <View key={item.name} style={listStyles.infoCard}>
-              <Image
-                source={{ uri: item.sprite }}
-                style={{ width: 150, height: 150 }}
-              />
-              <Text style={listStyles.font}>{item.name}</Text>
-              {item.types.map((type, index) => (
-                <Text
-                  key={index}
-                  style={{
-                    backgroundColor: typeColors[type],
-                    color: colors.white,
-                    borderWidth: 1,
-                    overflow: "hidden",
-                    borderRadius: 10,
-                    borderColor: typeColors[type],
-                    textAlign: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  {type}
-                </Text>
-              ))}
-            </View>
-          </TouchableOpacity>
-        </SafeAreaView>
-      )}
-      keyExtractor={(item) => item.name}
-    />
+    <SafeAreaView style={listStyles.container}>
+      <View style={listStyles.buttonContainer}>
+        <TouchableOpacity
+          style={listStyles.button}
+          onPress={() => {
+            navigation.pop();
+          }}
+        >
+          <Text>Close</Text>
+        </TouchableOpacity>
+      </View>
+
+      <SearchInput
+        icon="search"
+        placeholder="Search for a Pokemon..."
+        onChangeText={handleSearchInput}
+        value={filteredSearch}
+      />
+
+      <FlatList
+        data={filteredPokemon}
+        numColumns={1}
+        renderItem={({ item }) => (
+          <View style={listStyles.flatListContainer}>
+            <TouchableOpacity onPress={() => OnPress(item)}>
+              <View key={item.name} style={listStyles.infoCard}>
+                <Image
+                  source={{ uri: item.sprite }}
+                  style={{ width: 150, height: 150 }}
+                />
+                <Text style={listStyles.font}>{item.name}</Text>
+                {item.types.map((type, index) => (
+                  <Text
+                    key={index}
+                    style={{
+                      backgroundColor: typeColors[type],
+                      color: colors.white,
+                      borderWidth: 1,
+                      overflow: "hidden",
+                      borderRadius: 10,
+                      borderColor: typeColors[type],
+                      textAlign: "center",
+                      marginTop: 5,
+                    }}
+                  >
+                    {type}
+                  </Text>
+                ))}
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
   );
 };
 
 const listStyles = StyleSheet.create({
   container: {
+    backgroundColor: colors.red,
+    flex: 1,
+  },
+  flatListContainer: {
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: colors.red,
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50,
+  },
+  button: {
+    backgroundColor: colors.ceruleanBlue,
+    borderRadius: 15,
+    padding: 30,
   },
   infoCard: {
     marginTop: 50,
@@ -123,6 +167,7 @@ const listStyles = StyleSheet.create({
   font: {
     textAlign: "center",
     fontSize: 20,
+    color: colors.white,
   },
 });
 
