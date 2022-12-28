@@ -156,7 +156,7 @@ const listStyles = StyleSheet.create({
   button: {
     backgroundColor: colors.ceruleanBlue,
     borderRadius: 15,
-    padding: 30,
+    padding: 20,
   },
   infoCard: {
     marginTop: 50,
