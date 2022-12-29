@@ -18,12 +18,13 @@ const DisplayPokedex = ({ navigation, route }) => {
   const [filteredSearch, setFilteredSearch] = useState("");
 
   useEffect(() => {
-    for (let i = 1; i <= 151; i++) {
-      axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-        .then((response) => {
-          // The name can be found in response.data.name
-          // The sprite can be found in response.data.sprites.front_default
+    // Fetch Pokemon data from API
+    async function fetchData() {
+      for (let i = 1; i <= 151; i++) {
+        try {
+          const response = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon/${i}/`
+          );
           const name = response.data.name;
           const sprite = response.data.sprites.front_default;
           const id = response.data.id;
@@ -32,11 +33,12 @@ const DisplayPokedex = ({ navigation, route }) => {
             ...prevPokemon,
             { name, sprite, id, types },
           ]);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error(error);
-        });
+        }
+      }
     }
+    fetchData();
   }, []);
 
   const sortPokemonData = pokemon.sort((a, b) => {
