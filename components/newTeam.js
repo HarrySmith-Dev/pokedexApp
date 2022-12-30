@@ -96,23 +96,6 @@ const NewTeam = () => {
                 style={{ width: 50, height: 50 }}
               />
               <Text style={listStyles.font}>{item.name}</Text>
-              {item.types.map((type, index) => (
-                <Text
-                  key={index}
-                  style={{
-                    backgroundColor: typeColors[type],
-                    color: colors.white,
-                    borderWidth: 1,
-                    overflow: "hidden",
-                    borderRadius: 10,
-                    borderColor: typeColors[type],
-                    textAlign: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  {type}
-                </Text>
-              ))}
             </View>
           </View>
         )}
