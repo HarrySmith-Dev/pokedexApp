@@ -63,7 +63,15 @@ const NewTeam = ({ navigation }) => {
         item,
       ]);
     } else {
-      alert("You have reached the maximum number of Pokemon allowed (6)!"); // NEW
+      alert("You have reached the maximum number of Pokemon allowed (6)!");
+    }
+  };
+
+  const SaveOnPress = () => {
+    if (selectedPokemon == 0) {
+      alert("Please select at least one Pokemon");
+    } else {
+      navigation.push("Current Team", { data: selectedPokemon });
     }
   };
 
@@ -105,12 +113,7 @@ const NewTeam = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-      <Button
-        title="Save"
-        onPress={() => {
-          navigation.push("Current Team", { selectedPokemon });
-        }}
-      >
+      <Button title="Save" onPress={SaveOnPress}>
         Save
       </Button>
       <SearchInput

@@ -7,20 +7,20 @@ import CurrentTeam from "./components/CurrentTeam";
 
 const Root = createStackNavigator();
 
-export default function App({ navigation }) {
+export default function App() {
   return (
     <NavigationContainer>
       <Root.Navigator screenOptions={{ headerShown: false }}>
         <Root.Screen name="Welcome" component={WelcomeScreen} />
         <Root.Screen name="Pokedex" component={Tabs} />
         <Root.Screen
-          name="Pokemon Details"
-          component={PokemonDetails}
+          name="Current Team"
+          component={CurrentTeam}
           options={({ route }) => ({ title: route.params.name })}
         />
         <Root.Screen
-          name="Current Team"
-          component={CurrentTeam}
+          name="Pokemon Details"
+          component={PokemonDetails}
           options={({ route }) => ({ title: route.params.name })}
         />
       </Root.Navigator>
