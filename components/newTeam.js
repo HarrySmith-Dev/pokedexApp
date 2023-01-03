@@ -11,9 +11,8 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
-const NewTeam = () => {
+const NewTeam = ({ navigation }) => {
   const [pokemon, setPokemon] = useState([]);
 
   const [filteredSearch, setFilteredSearch] = useState("");
@@ -58,7 +57,14 @@ const NewTeam = () => {
   });
 
   const OnPress = (item) => {
-    setSelectedPokemon((prevSelectedPokemon) => [...prevSelectedPokemon, item]);
+    if (selectedPokemon.length < 6) {
+      setSelectedPokemon((prevSelectedPokemon) => [
+        ...prevSelectedPokemon,
+        item,
+      ]);
+    } else {
+      alert("You have reached the maximum number of Pokemon allowed (6)!"); // NEW
+    }
   };
 
   const typeColors = {
@@ -87,20 +93,26 @@ const NewTeam = () => {
       <FlatList
         horizontal={true}
         data={selectedPokemon} // CHANGED
-        numColumns={1}
         renderItem={({ item }) => (
-          <View style={listStyles.flatListContainer}>
-            <View key={item.name} style={listStyles.infoCard}>
+          <View style={listStyles.horizontalContainer}>
+            <View key={item.name} style={listStyles.horizontalInfoCard}>
               <Image
                 source={{ uri: item.sprite }}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
               />
-              <Text style={listStyles.font}>{item.name}</Text>
             </View>
           </View>
         )}
         keyExtractor={(item) => item.id}
       />
+      <Button
+        title="Save"
+        onPress={() => {
+          navigation.push("Current Team", { selectedPokemon });
+        }}
+      >
+        Save
+      </Button>
       <SearchInput
         icon="search"
         placeholder="Search for a Pokemon..."
@@ -166,6 +178,17 @@ const listStyles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     color: colors.white,
+  },
+  horizontalContainer: {
+    flex: 1,
+    marginTop: 50,
+    marginBottom: 70,
+    marginLeft: 15,
+  },
+  horizontalInfoCard: {
+    backgroundColor: colors.bostonRed,
+    borderRadius: 10,
+    marginRight: 15,
   },
 });
 

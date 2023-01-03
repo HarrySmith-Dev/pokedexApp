@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomColor: colors.bostonRed,
     borderBottomWidth: 2,
-    marginTop: 50,
+    marginTop: 40,
     paddingLeft: 5,
   },
   input: {
