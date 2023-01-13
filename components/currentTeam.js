@@ -23,7 +23,7 @@ const CurrentTeam = ({ navigation, route }) => {
           navigation.pop();
         }}
       >
-        <Ionicons name="arrow-back" size={30} color={colors.ceruleanBlue} />
+        Back
       </Button>
       <View style={styles.imageContainer}>
         <Image source={require("./img/your.png")}></Image>

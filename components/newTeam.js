@@ -10,7 +10,9 @@ import {
   SafeAreaView,
   StyleSheet,
   Button,
+  TouchableOpacity,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const NewTeam = ({ navigation }) => {
   const [pokemon, setPokemon] = useState([]);
@@ -56,7 +58,7 @@ const NewTeam = ({ navigation }) => {
     return pokemon.name.toLowerCase().includes(filteredSearch.toLowerCase());
   });
 
-  const OnPress = (item) => {
+  const onPress = (item) => {
     if (selectedPokemon.length < 6) {
       setSelectedPokemon((prevSelectedPokemon) => [
         ...prevSelectedPokemon,
@@ -67,12 +69,16 @@ const NewTeam = ({ navigation }) => {
     }
   };
 
-  const SaveOnPress = () => {
+  const saveOnPress = () => {
     if (selectedPokemon == 0) {
       alert("Please select at least one Pokemon");
     } else {
       navigation.push("Current Team", { data: selectedPokemon });
     }
+  };
+
+  const clearFlatList = () => {
+    setSelectedPokemon([]);
   };
 
   const typeColors = {
@@ -100,7 +106,7 @@ const NewTeam = ({ navigation }) => {
     <SafeAreaView style={listStyles.container}>
       <FlatList
         horizontal={true}
-        data={selectedPokemon} // CHANGED
+        data={selectedPokemon}
         renderItem={({ item }) => (
           <View style={listStyles.horizontalContainer}>
             <View key={item.name} style={listStyles.horizontalInfoCard}>
@@ -113,9 +119,29 @@ const NewTeam = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-      <Button title="Save" onPress={SaveOnPress}>
-        Save
-      </Button>
+      <TouchableOpacity
+        style={[
+          selectedPokemon.length > 0
+            ? { display: "flex" }
+            : { display: "none" },
+          listStyles.saveButton,
+        ]}
+        onPress={saveOnPress}
+      >
+        <Ionicons
+          name="archive"
+          size={30}
+          color={colors.ceruleanBlue}
+        ></Ionicons>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={
+          selectedPokemon.length > 0 ? { display: "flex" } : { display: "none" }
+        }
+        onPress={clearFlatList}
+      >
+        <Text>Clear</Text>
+      </TouchableOpacity>
       <SearchInput
         icon="search"
         placeholder="Search for a Pokemon..."
@@ -151,7 +177,16 @@ const NewTeam = ({ navigation }) => {
                   {type}
                 </Text>
               ))}
-              <Button title="Add to Team" onPress={() => OnPress(item)} />
+              <View style={listStyles.addButtonContainer}>
+                <TouchableOpacity
+                  style={listStyles.button}
+                  onPress={() => {
+                    onPress(item);
+                  }}
+                >
+                  <Ionicons name="add" size={40} color={colors.goldenYellow} />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         )}
@@ -192,6 +227,21 @@ const listStyles = StyleSheet.create({
     backgroundColor: colors.bostonRed,
     borderRadius: 10,
     marginRight: 15,
+  },
+  buttonContainer: {
+    flex: 1,
+  },
+  saveButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    alignItems: "center",
+    marginTop: 40,
+  },
+  addButtonContainer: {
+    alignItems: "center",
   },
 });
 

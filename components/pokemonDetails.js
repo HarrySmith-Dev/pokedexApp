@@ -35,7 +35,7 @@ const PokemonDetails = ({ navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: colors.bostonRed, flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: colors.red, flex: 1 }}>
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
@@ -70,6 +70,10 @@ const PokemonDetails = ({ navigation, route }) => {
               borderColor: typeColors[type],
               textAlign: "center",
               marginTop: 5,
+              paddingLeft: 30,
+              paddingRight: 30,
+              paddingTop: 5,
+              paddingBottom: 5,
             }}
           >
             {type}
@@ -105,10 +109,6 @@ const styles = StyleSheet.create({
   },
   typeFont: {
     fontSize: 15,
-    color: colors.white,
-  },
-  buttonText: {
-    fontSize: 16,
     color: colors.white,
   },
 });
