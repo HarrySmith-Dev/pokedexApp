@@ -9,7 +9,7 @@ const SearchInput = ({ icon, ...props }) => {
       <TextInput
         {...props}
         style={styles.input}
-        placeholderTextColor={colors.ceruleanBlue}
+        placeholderTextColor={colors.white}
       />
       {icon && (
         <Ionicons
