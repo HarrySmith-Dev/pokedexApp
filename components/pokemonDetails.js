@@ -43,7 +43,7 @@ const PokemonDetails = ({ navigation, route }) => {
             navigation.pop();
           }}
         >
-          <Ionicons name="arrow-back" size={30} color={colors.ceruleanBlue} />
+          <Ionicons name="arrow-back" size={40} color={colors.goldenYellow} />
         </TouchableOpacity>
 
         <Image
