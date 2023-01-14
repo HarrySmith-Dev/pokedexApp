@@ -104,6 +104,23 @@ const NewTeam = ({ navigation }) => {
 
   return (
     <SafeAreaView style={listStyles.container}>
+      <TouchableOpacity
+        style={
+          selectedPokemon.length > 0 ? { display: "flex" } : { display: "none" }
+        }
+        onPress={clearFlatList}
+      >
+        <Text
+          style={{
+            color: colors.white,
+            marginTop: 20,
+            marginLeft: 20,
+            fontSize: 20,
+          }}
+        >
+          Clear
+        </Text>
+      </TouchableOpacity>
       <FlatList
         horizontal={true}
         data={selectedPokemon}
@@ -131,17 +148,10 @@ const NewTeam = ({ navigation }) => {
         <Ionicons
           name="archive"
           size={30}
-          color={colors.ceruleanBlue}
+          color={colors.goldenYellow}
         ></Ionicons>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={
-          selectedPokemon.length > 0 ? { display: "flex" } : { display: "none" }
-        }
-        onPress={clearFlatList}
-      >
-        <Text>Clear</Text>
-      </TouchableOpacity>
+
       <SearchInput
         icon="search"
         placeholder="Search for a Pokemon..."
@@ -238,7 +248,7 @@ const listStyles = StyleSheet.create({
     top: 0,
     right: 0,
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 50,
   },
   addButtonContainer: {
     alignItems: "center",
