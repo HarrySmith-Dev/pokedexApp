@@ -29,9 +29,11 @@ const DisplayPokedex = ({ navigation, route }) => {
           const sprite = response.data.sprites.front_default;
           const id = response.data.id;
           const types = response.data.types.map((type) => type.type.name);
+          const height = response.data.height;
+          const weight = response.data.weight;
           setPokemon((prevPokemon) => [
             ...prevPokemon,
-            { name, sprite, id, types },
+            { name, sprite, id, types, height, weight },
           ]);
         } catch (error) {
           console.error(error);

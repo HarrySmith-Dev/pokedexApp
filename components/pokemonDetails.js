@@ -12,7 +12,7 @@ import colors from "./Colors";
 
 const PokemonDetails = ({ navigation, route }) => {
   let item = route.params.data;
-  const { name, sprite, id, types } = item;
+  const { name, sprite, id, types, height, weight } = item;
   const typeColors = {
     fire: colors.fireRed,
     water: colors.waterBlue,
@@ -50,6 +50,7 @@ const PokemonDetails = ({ navigation, route }) => {
           source={{ uri: sprite }}
           style={{ width: 250, height: 250 }}
         ></Image>
+
         <Text style={styles.titleFont}>{name}</Text>
         {id >= 100 ? (
           <Text style={styles.smallFont}>#{id}</Text>
@@ -79,6 +80,16 @@ const PokemonDetails = ({ navigation, route }) => {
             {type}
           </Text>
         ))}
+        <View style={styles.parent}>
+          <View style={styles.rowContainer}>
+            <Text style={styles.subTitleFont}>Height</Text>
+            <Text style={styles.smallFont}>{height}m</Text>
+          </View>
+          <View style={styles.rowContainer}>
+            <Text style={styles.subTitleFont}>Weight</Text>
+            <Text style={styles.smallFont}>{weight}lbs</Text>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -106,6 +117,19 @@ const styles = StyleSheet.create({
   smallFont: {
     font: 12,
     color: colors.white,
+  },
+  parent: {
+    flexDirection: "row",
+  },
+  rowContainer: {
+    marginTop: 20,
+    marginRight: 50,
+    marginLeft: 50,
+    alignItems: "center",
+  },
+  subTitleFont: {
+    fontSize: 23,
+    color: colors.steelGrey,
   },
   typeFont: {
     fontSize: 15,
