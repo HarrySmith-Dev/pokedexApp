@@ -9,7 +9,6 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -70,11 +69,7 @@ const NewTeam = ({ navigation }) => {
   };
 
   const saveOnPress = () => {
-    if (selectedPokemon == 0) {
-      alert("Please select at least one Pokemon");
-    } else {
-      navigation.push("Current Team", { data: selectedPokemon });
-    }
+    navigation.push("Current Team", { data: selectedPokemon });
   };
 
   const clearFlatList = () => {
