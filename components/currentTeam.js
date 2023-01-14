@@ -6,7 +6,7 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 import colors from "./Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,19 +16,21 @@ const CurrentTeam = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button
-        title="back"
-        style={styles.button}
-        onPress={() => {
-          navigation.pop();
-        }}
-      >
-        Back
-      </Button>
-      <View style={styles.imageContainer}>
-        <Image source={require("./img/your.png")}></Image>
-        <Image source={require("./img/team.png")}></Image>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.pop();
+          }}
+        >
+          <Ionicons
+            name="arrow-back"
+            size={40}
+            color={colors.goldenYellow}
+          ></Ionicons>
+        </TouchableOpacity>
       </View>
+
       <View>
         <FlatList
           data={item}
@@ -46,6 +48,8 @@ const CurrentTeam = ({ navigation, route }) => {
           )}
           keyExtractor={(item) => item.name}
         />
+        <View style={styles.saveContainer}></View>
+        <Text style={styles.saveFont}>Would you like to save this team?</Text>
       </View>
     </SafeAreaView>
   );
@@ -56,14 +60,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.red,
     flex: 1,
   },
+  buttonContainer: {
+    marginBottom: 70,
+    marginLeft: 10,
+  },
   button: {
     paddingVertical: 12,
     paddingHorizontal: 20,
     position: "absolute",
+    alignItems: "center",
     top: 0,
     left: 0,
-    alignItems: "center",
-    marginTop: 100,
   },
   flatListContainer: {
     flex: 1,
@@ -83,8 +90,17 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     marginBottom: 10,
+    backgroundColor: colors.ceruleanBlue,
     justifyContent: "center",
     alignItems: "center",
+  },
+  saveContainer: {
+    marginTop: 30,
+  },
+  saveFont: {
+    textAlign: "center",
+    fontSize: 23,
+    color: colors.white,
   },
 });
 export default CurrentTeam;
