@@ -11,6 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 const DisplayPokedex = ({ navigation, route }) => {
   const [pokemon, setPokemon] = useState([]);
@@ -31,9 +32,13 @@ const DisplayPokedex = ({ navigation, route }) => {
           const types = response.data.types.map((type) => type.type.name);
           const height = response.data.height;
           const weight = response.data.weight;
+          const stats = response.data.stats.map((stat) => {
+            return { name: stat.stat.name, baseStat: stat.base_stat };
+          });
+
           setPokemon((prevPokemon) => [
             ...prevPokemon,
-            { name, sprite, id, types, height, weight },
+            { name, sprite, id, types, height, weight, stats },
           ]);
         } catch (error) {
           console.error(error);
@@ -92,7 +97,7 @@ const DisplayPokedex = ({ navigation, route }) => {
             navigation.pop();
           }}
         >
-          <Text>Close</Text>
+          <Ionicons name="arrow-back" size={40} color={colors.goldenYellow} />
         </TouchableOpacity>
       </View>
 

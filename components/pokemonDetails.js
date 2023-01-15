@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
+  Dimensions,
 } from "react-native";
 import colors from "./Colors";
 
 const PokemonDetails = ({ navigation, route }) => {
   let item = route.params.data;
-  const { name, sprite, id, types, height, weight } = item;
+  const { name, sprite, id, types, height, weight, stats } = item;
   const typeColors = {
     fire: colors.fireRed,
     water: colors.waterBlue,
@@ -33,7 +34,13 @@ const PokemonDetails = ({ navigation, route }) => {
     ghost: colors.ghostViolet,
     dark: colors.lightBlack,
   };
-
+  const windowWidth = Dimensions.get("window").width;
+  const StatBar = ({ stat, color }) => {
+    const barWidth = (stat / 200) * windowWidth; // calculate the width of the bar based on the stat value
+    return (
+      <View style={[styles.bar, { width: barWidth, backgroundColor: color }]} />
+    );
+  };
   return (
     <SafeAreaView style={{ backgroundColor: colors.red, flex: 1 }}>
       <View style={styles.container}>
@@ -90,6 +97,13 @@ const PokemonDetails = ({ navigation, route }) => {
             <Text style={styles.smallFont}>{weight}lbs</Text>
           </View>
         </View>
+
+        {stats.map((stat, index) => (
+          <View key={index} style={styles.statsContainer}>
+            <Text>{stat.name}:</Text>
+            <StatBar stat={stat.baseStat} color={colors.goldenYellow} />
+          </View>
+        ))}
       </View>
     </SafeAreaView>
   );
@@ -100,6 +114,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  bar: {
+    height: 20,
   },
   button: {
     paddingVertical: 12,
