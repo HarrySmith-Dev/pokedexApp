@@ -113,6 +113,7 @@ const DisplayPokedex = ({ navigation, route }) => {
         numColumns={1}
         renderItem={({ item }) => (
           <View style={listStyles.flatListContainer}>
+            <View style={listStyles.triangle} />
             <TouchableOpacity onPress={() => OnPress(item)}>
               <View key={item.name} style={listStyles.infoCard}>
                 <Image
@@ -152,6 +153,7 @@ const listStyles = StyleSheet.create({
     backgroundColor: colors.red,
     flex: 1,
   },
+
   flatListContainer: {
     flex: 1,
     justifyContent: "space-between",
@@ -177,6 +179,22 @@ const listStyles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     color: colors.white,
+  },
+  triangle: {
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    borderTopWidth: 25,
+    borderRightWidth: 25,
+    borderLeftWidth: 25,
+    borderTopColor: colors.electricYellow,
+    borderRightColor: "transparent",
+    borderLeftColor: "transparent",
+    transform: [{ rotate: "270deg" }],
+    marginRight: 10,
+    position: "absolute",
+    top: 160,
+    marginLeft: 30,
+    left: 0,
   },
 });
 
