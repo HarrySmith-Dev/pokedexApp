@@ -58,13 +58,17 @@ const NewTeam = ({ navigation }) => {
   });
 
   const onPress = (item) => {
-    if (selectedPokemon.length < 6) {
+    if (selectedPokemon.find((p) => p.id === item.id)) {
+      alert(
+        "You've already selected this pokemon, kindly choose another option"
+      );
+    } else if (selectedPokemon.length < 6) {
       setSelectedPokemon((prevSelectedPokemon) => [
         ...prevSelectedPokemon,
         item,
       ]);
     } else {
-      alert("You have reached the maximum number of Pokemon allowed (6)!");
+      alert("You have reached the maximum number of Pokemon allowed (6)");
     }
   };
 
