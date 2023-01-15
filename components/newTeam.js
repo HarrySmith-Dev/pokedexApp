@@ -99,23 +99,41 @@ const NewTeam = ({ navigation }) => {
 
   return (
     <SafeAreaView style={listStyles.container}>
-      <TouchableOpacity
-        style={
-          selectedPokemon.length > 0 ? { display: "flex" } : { display: "none" }
-        }
-        onPress={clearFlatList}
-      >
-        <Text
-          style={{
-            color: colors.white,
-            marginTop: 20,
-            marginLeft: 20,
-            fontSize: 20,
-          }}
+      <View style={listStyles.columnContainer}>
+        <TouchableOpacity
+          style={[
+            selectedPokemon.length > 0
+              ? { display: "flex" }
+              : { display: "none" },
+            listStyles.saveButton,
+          ]}
+          onPress={saveOnPress}
         >
-          Clear
-        </Text>
-      </TouchableOpacity>
+          <Ionicons
+            name="archive"
+            size={30}
+            color={colors.goldenYellow}
+          ></Ionicons>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            selectedPokemon.length > 0
+              ? { display: "flex" }
+              : { display: "none" },
+            listStyles.clearButton,
+          ]}
+          onPress={clearFlatList}
+        >
+          <Text
+            style={{
+              color: colors.white,
+              fontSize: 20,
+            }}
+          >
+            Clear
+          </Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         horizontal={true}
         data={selectedPokemon}
@@ -131,21 +149,6 @@ const NewTeam = ({ navigation }) => {
         )}
         keyExtractor={(item) => item.id}
       />
-      <TouchableOpacity
-        style={[
-          selectedPokemon.length > 0
-            ? { display: "flex" }
-            : { display: "none" },
-          listStyles.saveButton,
-        ]}
-        onPress={saveOnPress}
-      >
-        <Ionicons
-          name="archive"
-          size={30}
-          color={colors.goldenYellow}
-        ></Ionicons>
-      </TouchableOpacity>
 
       <SearchInput
         icon="search"
@@ -224,7 +227,7 @@ const listStyles = StyleSheet.create({
   },
   horizontalContainer: {
     flex: 1,
-    marginTop: 50,
+    marginTop: 40,
     marginBottom: 70,
     marginLeft: 15,
   },
@@ -243,10 +246,21 @@ const listStyles = StyleSheet.create({
     top: 0,
     right: 0,
     alignItems: "center",
-    marginTop: 50,
+  },
+  clearButton: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
   },
   addButtonContainer: {
     alignItems: "center",
+  },
+  columnContainer: {
+    marginTop: 20,
+    marginBottom: 50,
   },
 });
 
