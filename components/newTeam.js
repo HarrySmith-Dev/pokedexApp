@@ -192,7 +192,7 @@ const NewTeam = ({ navigation }) => {
                     onPress(item);
                   }}
                 >
-                  <Ionicons name="add" size={40} color={colors.goldenYellow} />
+                  <Ionicons name="add" size={50} color={colors.goldenYellow} />
                 </TouchableOpacity>
               </View>
             </View>
