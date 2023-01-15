@@ -30,17 +30,20 @@ const CurrentTeam = ({ navigation, route }) => {
           ></Ionicons>
         </TouchableOpacity>
       </View>
-
+      <View style={styles.imageContainer}>
+        <Image source={require("./img/your.png")} />
+        <Image source={require("./img/team.png")} />
+      </View>
       <View>
         <FlatList
           data={item}
-          numColumns={2}
+          numColumns={3}
           renderItem={({ item }) => (
             <View key={item.name} style={styles.flatListContainer}>
               <View style={styles.infoCard}>
                 <Image
                   source={{ uri: item.sprite }}
-                  style={{ width: 150, height: 150 }}
+                  style={{ width: 120, height: 120 }}
                 ></Image>
                 <Text style={styles.font}>{item.name}</Text>
               </View>
@@ -48,8 +51,6 @@ const CurrentTeam = ({ navigation, route }) => {
           )}
           keyExtractor={(item) => item.name}
         />
-        <View style={styles.saveContainer}></View>
-        <Text style={styles.saveFont}>Would you like to save this team?</Text>
       </View>
     </SafeAreaView>
   );
@@ -71,11 +72,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     top: 0,
     left: 0,
+    marginTop: 20,
   },
   flatListContainer: {
     flex: 1,
-    justifyContent: "space-between",
     alignItems: "center",
+    justifyContent: "center",
+    marginTop: 60,
   },
   infoCard: {
     backgroundColor: colors.bostonRed,
@@ -88,10 +91,7 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   imageContainer: {
-    flex: 1,
-    marginBottom: 10,
-    backgroundColor: colors.ceruleanBlue,
-    justifyContent: "center",
+    marginTop: 20,
     alignItems: "center",
   },
   saveContainer: {
