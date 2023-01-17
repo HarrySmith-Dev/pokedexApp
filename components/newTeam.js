@@ -184,6 +184,7 @@ const NewTeam = ({ navigation }) => {
                     borderColor: typeColors[type],
                     textAlign: "center",
                     marginTop: 5,
+                    fontSize: 17,
                   }}
                 >
                   {type}
