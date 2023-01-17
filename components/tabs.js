@@ -1,13 +1,15 @@
+/**
+ * @fileoverview This component displays the bottom navigation bar which is where DisplayPokedex and NewTeam can be accessed from.
+ */
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import CurrentTeam from "./CurrentTeam";
 import DisplayPokedex from "./DisplayPokedex";
 import colors from "./Colors";
 import NewTeam from "./NewTeam";
 
 const BottomTab = createBottomTabNavigator();
 
-export const Tabs = ({ navigation }) => {
+export const Tabs = () => {
   return (
     <BottomTab.Navigator
       initialRouteName="Display Pokedex"

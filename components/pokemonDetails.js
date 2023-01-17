@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This component displays the Pokemon details such as ID, base stats etc, based on user selection from DisplayPokedex component
+ */
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
@@ -13,7 +16,9 @@ import colors from "./Colors";
 
 const PokemonDetails = ({ navigation, route }) => {
   let item = route.params.data;
+
   const { name, sprite, id, types, height, weight, stats } = item;
+
   const typeColors = {
     fire: colors.fireRed,
     water: colors.waterBlue,
@@ -33,7 +38,7 @@ const PokemonDetails = ({ navigation, route }) => {
     dragon: colors.ultraViolet,
     ghost: colors.ghostViolet,
     dark: colors.lightBlack,
-  };
+  }; //Object holding type colours
 
   const statColors = {
     hp: colors.psychicPink,
@@ -42,8 +47,10 @@ const PokemonDetails = ({ navigation, route }) => {
     speed: colors.electricYellow,
     ["special-attack"]: colors.bostonRed,
     ["special-defense"]: colors.ceruleanBlue,
-  };
+  }; //Object holding stat colours
+
   const windowWidth = Dimensions.get("window").width;
+
   const StatBar = ({ stat, color }) => {
     const barWidth = (stat / 200) * windowWidth; // calculate the width of the bar based on the stat value
     return (
@@ -52,7 +59,8 @@ const PokemonDetails = ({ navigation, route }) => {
         <Text style={styles.barText}>{stat}</Text>
       </View>
     );
-  };
+  }; //StatBar component which takes in stat and color props and returns a bar with the stat value
+
   return (
     <SafeAreaView style={{ backgroundColor: colors.red, flex: 1 }}>
       <View style={styles.container}>

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays a list of all generation one Pokemon, with a search function that users can use to search for a specific Pokemon.
+ * This is also where the PokemonDetails component can be accessed from by selecting a Pokemon from the list.
+ */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import colors from "./Colors";
@@ -14,18 +18,24 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 
 const DisplayPokedex = ({ navigation, route }) => {
+  //useState hook for pokemonData
+
   const [pokemon, setPokemon] = useState([]);
 
+  //useState hook for search
   const [filteredSearch, setFilteredSearch] = useState("");
 
+  //useEffect hook to fetch data from API
   useEffect(() => {
-    // Fetch Pokemon data from API
     async function fetchData() {
+      //loop through 151 Pokemon
       for (let i = 1; i <= 151; i++) {
         try {
+          //Try, catch to ensure errors are logged
           const response = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${i}/`
-          );
+          ); //API call
+          //Data from API
           const name = response.data.name;
           const sprite = response.data.sprites.front_default;
           const id = response.data.id;
@@ -48,20 +58,24 @@ const DisplayPokedex = ({ navigation, route }) => {
     fetchData();
   }, []);
 
+  //sort Pokemon data by ID
   const sortPokemonData = pokemon.sort((a, b) => {
     if (a.id < b.id) return -1;
     if (a.id > b.id) return 1;
     return 0;
   });
 
+  //handle search input
   const handleSearchInput = (text) => {
     setFilteredSearch(text);
   };
 
+  //filter the Pokemon search based on user input
   const filteredPokemon = sortPokemonData.filter((pokemon) => {
     return pokemon.name.toLowerCase().includes(filteredSearch.toLowerCase());
   });
 
+  //handles onPress when user selects Pokemon, sends them to details screen using Navigation prop and push()
   const OnPress = (item) => {
     let pokemonName = item.name;
     navigation.push("Pokemon Details", { data: item, name: pokemonName });

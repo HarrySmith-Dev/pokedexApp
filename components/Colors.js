@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This component stores all the colours used in this project
+ */
 export default {
   red: "#FF0000",
   bostonRed: "#CC0000",

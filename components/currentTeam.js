@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This component displays the users current team that they saved from the NewTeam component
+ */
 import React from "react";
 import {
   SafeAreaView,
@@ -21,6 +24,7 @@ const CurrentTeam = ({ navigation, route }) => {
           style={styles.button}
           onPress={() => {
             navigation.pop();
+            //Utilizing navigation prop to pop the current screen back to the previous screen using a button
           }}
         >
           <Ionicons
@@ -49,7 +53,7 @@ const CurrentTeam = ({ navigation, route }) => {
               </View>
             </View>
           )}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.id}
         />
       </View>
     </SafeAreaView>
@@ -93,14 +97,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 20,
     alignItems: "center",
-  },
-  saveContainer: {
-    marginTop: 30,
-  },
-  saveFont: {
-    textAlign: "center",
-    fontSize: 23,
-    color: colors.white,
   },
 });
 export default CurrentTeam;

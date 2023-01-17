@@ -1,3 +1,6 @@
+/**
+ * @fileoverview This component is where the Search function is styled and used in both DisplayPokedex and NewTeam
+ */
 import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

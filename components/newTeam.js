@@ -1,3 +1,7 @@
+/**
+ * @fileoverview This component displays a list of Pokemon with an add symbol under each, for users to add up to 6 Pokemon to a seperate list which can then be saved and
+ * move them onto the CurrentTeam component. This component is accessed through the Tabs component.
+ */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import colors from "./Colors";
@@ -57,6 +61,10 @@ const NewTeam = ({ navigation }) => {
     return pokemon.name.toLowerCase().includes(filteredSearch.toLowerCase());
   });
 
+  /*onPress which checks if user has already added a Pokemon to a list based on ID or if the user has gone over the amount(6)
+    This is triggered when the user selects the plus icon to add a Pokemon to the horizontal list
+  */
+
   const onPress = (item) => {
     if (selectedPokemon.find((p) => p.id === item.id)) {
       alert(
@@ -72,10 +80,12 @@ const NewTeam = ({ navigation }) => {
     }
   };
 
+  //onPress which pushes user to the CurrentTeam component
   const saveOnPress = () => {
     navigation.push("Current Team", { data: selectedPokemon });
   };
 
+  //clear function which is triggered when user selects the clear button
   const clearFlatList = () => {
     setSelectedPokemon([]);
   };

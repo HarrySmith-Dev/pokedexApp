@@ -1,7 +1,9 @@
+/**
+ * @fileoverview This component displays the Pokedex like welcome screen which has a button to send users to DisplayPokedex
+ */
 import React from "react";
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
