@@ -169,7 +169,7 @@ const NewTeam = ({ navigation }) => {
             <View key={item.name} style={listStyles.infoCard}>
               <Image
                 source={{ uri: item.sprite }}
-                style={{ width: 150, height: 150 }}
+                style={{ width: 200, height: 200 }}
               />
               <Text style={listStyles.font}>{item.name}</Text>
               {item.types.map((type, index) => (

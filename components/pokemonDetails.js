@@ -162,10 +162,10 @@ const styles = StyleSheet.create({
   },
   barContainer: {
     position: "relative",
-    height: 20,
+    height: 25,
   },
   bar: {
-    height: 20,
+    height: 25,
     borderRadius: 10,
     marginLeft: 5,
     marginTop: 2,
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.white,
     marginTop: 2.5,
+    fontSize: 15,
   },
   statsContainer: {
     flexDirection: "row",

@@ -118,7 +118,7 @@ const DisplayPokedex = ({ navigation, route }) => {
               <View key={item.name} style={listStyles.infoCard}>
                 <Image
                   source={{ uri: item.sprite }}
-                  style={{ width: 150, height: 150 }}
+                  style={{ width: 200, height: 200 }}
                 />
                 <Text style={listStyles.font}>{item.name}</Text>
                 {item.types.map((type, index) => (
@@ -133,6 +133,7 @@ const DisplayPokedex = ({ navigation, route }) => {
                       borderColor: typeColors[type],
                       textAlign: "center",
                       marginTop: 5,
+                      fontSize: 17,
                     }}
                   >
                     {type}
@@ -192,7 +193,7 @@ const listStyles = StyleSheet.create({
     transform: [{ rotate: "270deg" }],
     marginRight: 10,
     position: "absolute",
-    top: 160,
+    top: 200,
     marginLeft: 30,
     left: 0,
   },
